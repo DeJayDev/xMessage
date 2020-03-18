@@ -1,4 +1,5 @@
 name: xMessage
 version: ${project.version}
+author: DeJayDev
 main: dev.dejay.xmessage.Main
 description: Message x Servers

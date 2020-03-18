@@ -1,0 +1,4 @@
+invalid-player: "Could not find {receiver}"
+no-reply: "You have no messages to reply to!"
+sender-msg: "{sender} -> {receiver} ({server-name}): {message}"
+receiver-msg: "{sender} ({server-name}) -> {receiver}: {message}"
