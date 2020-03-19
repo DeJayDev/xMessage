@@ -25,6 +25,13 @@ public class CmdReply extends Command {
     if (commandSender instanceof ProxiedPlayer) {
       sender = (ProxiedPlayer) commandSender;
 
+      if(!(Main.INSTANCE.messageHistory.containsKey(sender.getUniqueId()))) {
+        sender.sendMessage(new
+            ComponentBuilder("You do not have anyone to reply to!").color(ChatColor.DARK_RED).create()
+        );
+        return;
+      }
+
       ProxiedPlayer receiver = proxy.getPlayer(Main.INSTANCE.messageHistory.get(sender.getUniqueId()));
       List<String> msgList = new LinkedList<>(Arrays.asList(args));
       String message = String.join(", ", msgList.remove(0));// Build the message by removing the username (args[0])
