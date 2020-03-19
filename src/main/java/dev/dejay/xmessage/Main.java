@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.api.plugin.PluginManager;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
@@ -25,11 +26,12 @@ public final class Main extends Plugin {
   @Override
   public void onEnable() {
     INSTANCE = this;
-    getProxy().getPluginManager().registerCommand(this, new CmdMessage());
-    getProxy().getPluginManager().registerCommand(this, new CmdReply());
-    getProxy().getPluginManager().registerListener(this, new EventLeave());
+    PluginManager pluginManager = getProxy().getPluginManager();
+    pluginManager.registerCommand(this, new CmdMessage());
+    pluginManager.registerCommand(this, new CmdReply());
+    pluginManager.registerListener(this, new EventLeave());
 
-    if(!getDataFolder().exists()){
+    if (!getDataFolder().exists()) {
       getDataFolder().mkdir();
     } else {
       try {
@@ -42,7 +44,7 @@ public final class Main extends Plugin {
 
     File configFile = new File(getDataFolder(), "config.yml");
 
-    if(!configFile.exists()) { //If the config doesn't exist, let's try to make it.
+    if (!configFile.exists()) { //If the config doesn't exist, let's try to make it.
       try(InputStream stream = getResourceAsStream("config.yml")) {
         Files.copy(stream, configFile.toPath());
         config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
